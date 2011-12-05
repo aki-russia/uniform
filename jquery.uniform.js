@@ -486,7 +486,7 @@ Enjoy!
   
 
   function elementType(elem){
-    var type = elem.data("uniform-type");
+    var type = elem.data("uniformType");
     if(!type){
       if(elem.is("select")){
           //element is a select
@@ -512,7 +512,7 @@ Enjoy!
       }else if(elem.is(":submit, :reset, button, a, input[type=button]")){
         type = types.BUTTON;
       }
-      elem.data("uniform-type", type);
+      elem.data("uniformType", type);
     }
     return type;
   };
@@ -643,12 +643,12 @@ Enjoy!
     return this.each(function() {
       if($.support.selectOpacity){
         var elem = $(this);
-        if(elem.data("uniform-status") === status.APPLIED){
+        if(elem.data("uniformStatus") == status.APPLIED){
           return;
         }
         var type = elementType(elem);
         Do[type] && Do[type](elem);
-        elem.data("uniform-status", status.APPLIED);
+        elem.data("uniformStatus", status.APPLIED);
       }
     });
   };
