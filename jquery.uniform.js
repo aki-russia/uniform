@@ -532,7 +532,21 @@ Enjoy!
     var update = {};
 
     update[types.BUTTON] = function(element){
-      cleanClasses(element.closest("div"), element);
+      var divTag = element.closest("div"),
+        spanTag = $("<span/>");
+      cleanClasses(divTag, element);
+      element.detach();
+      var btnText;
+      if(element.is("a, button")){
+        btnText = element.text();
+      } else if(element.is(":submit, :reset, input[type=button]")){
+        btnText = element.attr("value");
+      }
+      btnText = btnText == "" ? element.is(":reset") ? "Reset" : "Submit" : btnText;
+      divTag.empty();
+      spanTag.html(btnText);
+      spanTag.append(element);
+      divTag.append(spanTag);
     };
 
     update[types.SELECT] = function(element){
